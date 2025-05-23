@@ -1,4 +1,4 @@
-import { MiniAppConfig } from "@/lib/config";
+import { MiniAppConfig } from "@/constants/config";
 import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 

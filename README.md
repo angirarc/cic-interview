@@ -8,6 +8,7 @@ A React Native mobile application built with Expo Router and Bun package manager
 
 - [Bun](https://bun.sh/) package manager
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- [A Supabase Account](https://supabase.com/)
 - iOS Simulator or Android Emulator (optional for mobile development)
 
 ## Getting Started
@@ -31,16 +32,18 @@ bun start
   - `(mini-apps)/`: Insurance product related screens
   - `(tabs)/`: Main tab navigation screens
 
-- `assets/`: Static assets including fonts and images
-
 - `components/`: Reusable React components
   - `headers/`: Header components
   - `ui/`: UI components like icons and tab bar elements
 
 - `constants/`: Application-wide constants and configurations
+  - `config`: Mini App configuration
+
+- `db/`: Prisma ORM configuration for supabase
+
+- `assets/`: Static assets including fonts and images
 
 - `lib/`: Core application logic
-  - `config/`: Application configuration
   - `schema/`: Data schemas
   - `services/`: API services
   - `store/`: State management using Zustand

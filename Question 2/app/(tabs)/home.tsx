@@ -1,7 +1,7 @@
 import ActivePolicy from '@/components/ActivePolicy';
 import Product from '@/components/Product';
 import { activePolicies } from '@/fixtures/policies';
-import miniAppConfig from '@/lib/config';
+import miniAppConfig from '@/constants/config';
 import { useRouter } from 'expo-router';
 import { ScrollView, Text, View } from 'react-native';
 
