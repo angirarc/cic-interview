@@ -4,6 +4,7 @@ import { activePolicies, statementEntries } from '@/fixtures/policies';
 import { InsuranceTypes } from '@/lib/types';
 import { Button, Text, View } from 'react-native';
 
+// Mini App for General Insurance
 const GeneralInsurance = () => {
   const activePolicy = activePolicies.find(pol => pol.type === InsuranceTypes.GENERAL);
 

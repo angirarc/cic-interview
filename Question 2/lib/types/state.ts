@@ -1,23 +1,28 @@
 import axios from 'axios';
 
+// possible statuses for api calls
 export type Status = 'INITIAL' | 'LOADING' | 'SUCCESS' | 'ERROR';
 
+// state interface for a single api call
 export interface State {
   state: Status;
   error?: any;
   message?: string;
 }
 
+// initial state for a single api call
 export const initialState: State = {
   state: 'INITIAL',
   error: undefined,
   message: undefined,
 };
 
+// type for multiple api calls
 export type LoadingStatus = {
   [fn: string]: State;
 };
 
+// type for function to create a new state object for a single api call
 export type NewStatusFunction = (
   current: LoadingStatus,
   name: string,
@@ -26,6 +31,7 @@ export type NewStatusFunction = (
   error?: unknown,
 ) => LoadingStatus;
 
+// function to create a new state object for a single api call
 export const newStatus: NewStatusFunction = (
   current: LoadingStatus,
   name: string,
@@ -41,6 +47,7 @@ export const newStatus: NewStatusFunction = (
   },
 });
 
+// utility function to build initial state for  api calls
 export const buildInitialSate = (functions: string[]) =>
   functions.reduce(
     (acc, fn) => ({
@@ -50,6 +57,7 @@ export const buildInitialSate = (functions: string[]) =>
     {},
   );
 
+// utility function to handle errors
 export const handleError = (e: unknown, set: any, state: LoadingStatus, fn: string) => {
   if (axios.isAxiosError(e)) {
     if (e.response) {

@@ -23,6 +23,7 @@ export const Label: React.FC<{ text?: string, className?: string }> = ({ text, c
     return <Text className={ `text-sm ${className}` }>{ text }</Text>
 }
 
+// React Native Text Input Extended to show errors and have a custom label
 const BasicInput: React.FC<InputProps> = props => (
     <View className={ `w-full ${props.containerClasses}` }>
         <Label text={ props.labelText } className={ props.labelClasses } />
@@ -35,6 +36,7 @@ const BasicInput: React.FC<InputProps> = props => (
     </View>
 )
 
+// React Native Password Input Extended to show errors, have a custom label as well as a toggle for password visibility
 export const PasswordInput: React.FC<InputProps> = props => {
     const [visible, setVisible] = useState(false)
     

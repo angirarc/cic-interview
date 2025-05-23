@@ -1,12 +1,10 @@
 import React from "react";
 import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { PaperProvider } from 'react-native-paper'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-import AppHeader from "@/components/headers/AppHeader";
-
 import "@/assets/global.css";
-import { StatusBar } from "expo-status-bar";
 
 const RootLayout = () => {
   return (

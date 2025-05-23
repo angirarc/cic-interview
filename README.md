@@ -1,9 +1,7 @@
-# Project Description
-
 # Problem Solving Skills - Question 1
+Solution for question 1 of the problem solving skills assessment.
 
-
-## CIC Mobile App - Question 2
+# CIC Mobile App - Question 2
 A React Native mobile application built with Expo Router and Bun package manager.
 
 ## Prerequisites
@@ -22,18 +20,6 @@ bun install
 2. Start the development server:
 ```bash
 bun start
-```
-
-3. Run on specific platforms:
-```bash
-# iOS
-bun ios
-
-# Android
-bun android
-
-# Web
-bun web
 ```
 
 ## Project Structure

@@ -5,6 +5,7 @@ import miniAppConfig from '@/lib/config';
 import { useRouter } from 'expo-router';
 import { ScrollView, Text, View } from 'react-native';
 
+// Home Screen
 const HomeScreen = () => {
   const router = useRouter();
   return (

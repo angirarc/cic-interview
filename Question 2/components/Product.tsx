@@ -6,6 +6,7 @@ interface Props {
     product: MiniAppConfig
 }
 
+// Card showing mini apps
 const Product = ({ product }: Props) => {
     const router = useRouter();
 

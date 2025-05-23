@@ -6,6 +6,7 @@ export interface MiniAppConfig {
     path: string;
 }
 
+// mini app config
 const miniAppConfig: MiniAppConfig[]  = [
     {
         name: "General Insurance",

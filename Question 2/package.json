@@ -8,7 +8,11 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "migrate": "bunx prisma generate && env $(cat .env.local | xargs) bunx prisma migrate dev"
+  },
+  "prisma": {
+    "schema": "src/db/schema.prisma"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

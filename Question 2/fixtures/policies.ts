@@ -1,6 +1,7 @@
 import { InsuranceTypes, PaymentMethod } from "@/lib/types";
 import { PolicyModel, StatementEntryModel } from "@/lib/types/models";
 
+// Dummy data for policies
 export const activePolicies: PolicyModel[] = [
     {
         type: InsuranceTypes.CAR,
@@ -28,6 +29,7 @@ export const activePolicies: PolicyModel[] = [
     }
 ]
 
+// Dummy data for statement entries
 export const statementEntries: StatementEntryModel[] = [
     {
         date: new Date(),

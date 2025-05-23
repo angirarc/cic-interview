@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 
 interface Props { policy: PolicyModel }
 
+// Card showing active policies
 const ActivePolicy = ({ policy }: Props) => {
     return (
         <View className="flex h-full w-full justify-center items-center">

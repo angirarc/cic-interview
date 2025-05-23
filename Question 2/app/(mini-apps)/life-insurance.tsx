@@ -3,6 +3,7 @@ import { activePolicies } from '@/fixtures/policies';
 import { InsuranceTypes } from '@/lib/types';
 import { Button, Text, View } from 'react-native';
 
+// Mini App for Life Insurance
 const LifeInsurance = () => {
     const activePolicy = activePolicies.find(pol => pol.type === InsuranceTypes.LIFE);
 

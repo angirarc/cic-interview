@@ -7,6 +7,8 @@ import { Button, Text } from "react-native";
 
 const Login = () => {
     const { state, userLogin } = useAuthStore();
+
+    // form validation logic
     const {
         control,
         handleSubmit,
@@ -16,17 +18,15 @@ const Login = () => {
         mode: "onChange",
     });
 
+    // form submit logic
     const submit = handleSubmit((payload) => userLogin(payload));
 
     return (
         <>
-            <Text style={{ fontSize:40, color: 'red'}}>
-                Let&#39;s sign you in
-            </Text>
             <Text
-                className={`text-text-500 ml-1 mt-3 mb-2 font-normal text-base font-DMSansRegular`}
+                className="ml-1 mt-3 mb-2 font-normal text-base"
             >
-                Welcome back, you&apos;ve been missed
+                Welcome back
             </Text>
             <Controller
                 control={control}

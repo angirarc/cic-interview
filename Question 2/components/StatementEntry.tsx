@@ -5,6 +5,7 @@ interface Props {
     entry: StatementEntryModel
 }
 
+// Component showing statement entries
 const StatementEntry = ({ entry }: Props) => {
     return (
         <View className="flex w-full justify-between items-center">

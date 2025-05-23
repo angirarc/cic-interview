@@ -1,26 +1,15 @@
 import * as React from "react";
-import { useFonts } from "@/useFonts";
-import SplashScreen from "./SplashScreen";
+import { useRouter } from "expo-router";
+import { Button, View, Text } from "react-native";
+
 import useAuthStore from "@/lib/store/AuthStore";
-import { Button, View } from "react-native";
-import { Text } from "react-native";
-import { Stack, useRouter } from "expo-router";
-import AppHeader from "@/components/headers/AppHeader";
-import { StatusBar } from "expo-status-bar";
+
+import SplashScreen from "./SplashScreen";
 
 const App = () => {
   const router = useRouter();
-  const [fontsLoaded, setFontsLoaded] = React.useState(false);
 
   const { state, getCurrentUser } = useAuthStore();
-  React.useEffect(() => {
-    const loadFonts = async () => {
-      const loaded = await useFonts();
-      setFontsLoaded(loaded);
-    };
-
-    loadFonts();
-  }, []);
 
   const toLogin = () => router.replace('/login');
   const toHome = () => router.replace('/home');
@@ -33,7 +22,7 @@ const App = () => {
   const isLoading = state.getCurrentUser.state === 'LOADING';
   const isError = state.getCurrentUser.state === 'ERROR';
 
-  if (isLoading || !fontsLoaded) return <SplashScreen />;
+  if (isLoading) return <SplashScreen />;
 
   if (!isError) {
     return (

@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// Storing data in async storage
 export const setItem = async (key: string, value: string): Promise<void> => {
   try {
     await AsyncStorage.setItem(key, value);
@@ -8,6 +9,7 @@ export const setItem = async (key: string, value: string): Promise<void> => {
   }
 };
 
+// Retrieving data from async storage
 export const getItem = async (key: string): Promise<string | null> => {
   try {
     return await AsyncStorage.getItem(key);
@@ -17,6 +19,7 @@ export const getItem = async (key: string): Promise<string | null> => {
   }
 };
 
+// Removing data from async storage
 export const removeItem = async (key: string): Promise<void> => {
   try {
     await AsyncStorage.removeItem(key);

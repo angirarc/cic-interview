@@ -4,21 +4,31 @@ import { Callback } from '@/lib/types';
 import { UserModel } from '@/lib/types/models';
 import { buildInitialSate, handleError, LoadingStatus, newStatus } from '@/lib/types/state';
 
-import { loginPayload, registerPayload } from '@/lib/schema/auth';
-import { getCurrentUser, performLogin } from '../services/authService';
 import { setItem } from '../utils/storage';
-// import { getCurrentUser, loginAction, registerAction } from '@/lib/services/authService';
+import { loginPayload, registerPayload } from '@/lib/schema/auth';
+import { getCurrentUser, performLogin, registerUser, logOutUser } from '../services/authService';
 
+// state interface for authentication state logic
 export interface AuthState {
+    // Whether the user is logged in or not
     isLoggedIn: boolean;
+    // The user object
     user?: UserModel;
+    // State for api calls
     state: LoadingStatus;
+    // Updating logged in state
     setIsLoggedIn: (value: boolean) => void;
+    // Updating user state
     setUser: (user: any) => void;
+    // Login function
     userLogin: (payload: loginPayload, callback?: Callback) => Promise<void>
+    // Register function
     registerUser: (payload: registerPayload, callback: Callback) => Promise<void>
+    // Get current user function
     getCurrentUser: (callback?: Callback) => Promise<void>
+    // Logout function
     logout: () => Promise<void>;
+    // Reset state
     reset: () => void;
 }
 
@@ -34,26 +44,29 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     userLogin: async (payload, callback) => {
         const { state } = get();
 
+        // Debouncing requests to prevent multiple requests at the same time
         if (state.userLogin.state === 'LOADING') return;
 
+        // Updating state to loading
         set({ state: newStatus(state, 'userLogin', 'LOADING') });
 
         try {
-            let resp = await performLogin();
-            const user = {
-                ...payload,
-                phone: "0711022792",
-                name: "John Doe"
-            };
-            set({ 
-                state: newStatus(state, 'userLogin', 'SUCCESS'),
-                isLoggedIn: true,
-                user
-            });
-            setItem('token', 'abcdedf');
-            setItem('user', JSON.stringify(user))
-            
-            if (callback) callback()
+            // Perfoming login
+            let resp = await performLogin(payload);
+            if (resp.error) throw new Error(resp.error);
+
+            if (resp.data) {
+                // Updating state to success and setting user
+                set({ 
+                    state: newStatus(state, 'userLogin', 'SUCCESS'),
+                    isLoggedIn: true,
+                    user: resp.data.user
+                });
+                // Setting user in async storage
+                setItem('user', JSON.stringify(resp.data.user))
+                // Calling callback
+                if (callback) callback()
+            }
         } catch (e) {
             handleError(e, set, state, 'userLogin');
         }
@@ -61,21 +74,29 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     registerUser: async (data, callback) => {
         const { state } = get();
 
+        // Debouncing requests to prevent multiple requests at the same time
         if (state.registerUser.state === 'LOADING') return;
 
+        // Updating state to loading
         set({ state: newStatus(state, 'registerUser', 'LOADING') });
 
         try {
-            let resp = await performLogin();
-            set({ 
-                state: newStatus(state, 'userLogin', 'SUCCESS'),
-                isLoggedIn: true,
-                user: data
-            });
-            setItem('token', 'abcdedf');
-            setItem('user', JSON.stringify(data));
-            
-            if (callback) callback()
+            // Performing registration
+            let resp = await registerUser(data);
+            // Handling error if any
+            if (resp.error) throw new Error(resp.error);
+
+            if (resp.data) {
+                // Updating state to success and setting user
+                set({ 
+                    state: newStatus(state, 'userLogin', 'SUCCESS'),
+                    isLoggedIn: true,
+                    user: resp.data.user
+                });
+                setItem('user', JSON.stringify(resp.data.user));
+                
+                if (callback) callback()
+            }
         } catch (e) {
             handleError(e, set, state, 'registerUser');
         }
@@ -83,38 +104,43 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     getCurrentUser: async (callback) => {
         const { state } = get();
 
+        // Debouncing requests to prevent multiple requests at the same time
         if (state.getCurrentUser.state === 'LOADING') return;
 
+        // Updating state to loading
         set({ state: newStatus(state, 'getCurrentUser', 'LOADING') });
 
-        const user: UserModel = {
-            name: "John Doe",
-            email: "john@doe.com",
-            phone: "0711022792"
-        };
-
         try {
+            // Getting current user
             let resp = await getCurrentUser();
-            set({ 
-                state: newStatus(state, 'getCurrentUser', 'SUCCESS'),
-                isLoggedIn: true,
-                user
-            });
-            setItem('token', 'abcdedf');
-            setItem('user', JSON.stringify(user));
-            
-            if (callback) callback()
+            // Handling error if any
+            if (resp.error) throw new Error(resp.error);
+            if (resp.data) {
+                // Updating state to success and setting user
+                set({ 
+                    state: newStatus(state, 'getCurrentUser', 'SUCCESS'),
+                    isLoggedIn: true,
+                    user: resp.data.user
+                });
+                setItem('user', JSON.stringify(resp.data.user));
+                
+                if (callback) callback()
+            }
         } catch (e) {
             handleError(e, set, state, 'getCurrentUser');
         }
     },
     logout: async () => {
         try {
-            set({
-                ...initial,
-                user: undefined,
-                isLoggedIn: false
-            });
+            let resp = await logOutUser();
+            if (resp.error) throw new Error(resp.error);
+            if (resp.data) {
+                set({
+                    ...initial,
+                    user: undefined,
+                    isLoggedIn: false
+                });
+            }
         } catch (error) {
             console.error("Logout error:", error);
         }
