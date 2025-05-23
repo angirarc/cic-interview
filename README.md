@@ -58,15 +58,9 @@ bun start
 
 ### Key Features
 
-- Built with React Native and Expo
-- Type-safe development with TypeScript
+- TypeScript for strong typing
 - File-based routing with Expo Router
 - Styling with NativeWind (TailwindCSS)
 - State management with Zustand
-- Form handling with React Hook Form
-- API integration with Axios
-
-## Development Tools
-
-- `bun lint`: Run ESLint for code linting
-- `bun reset-project`: Reset the project (useful for clearing caches)
+- Supabase BaaS + Prisma ORM
+- Form handling with React Hook Form & Yup
