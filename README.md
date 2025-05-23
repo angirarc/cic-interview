@@ -25,7 +25,7 @@ bun start
 
 ## Project Structure
 
-### Root Directories
+### Directory
 
 - `app/`: Contains all the application screens and navigation logic using Expo Router
   - `(auth)/`: Authentication related screens
@@ -44,11 +44,17 @@ bun start
 - `assets/`: Static assets including fonts and images
 
 - `lib/`: Core application logic
-  - `schema/`: Data schemas
-  - `services/`: API services
+  - `schema/`: Data schemas for form validation
+  - `services/`: Services for handling API requests and data fetching
   - `store/`: State management using Zustand
   - `types/`: TypeScript type definitions
+    - `index`: General system wide types
+    - `models`: Type definitions for data models
+    - `state`: Type definitions for API requests made within zustand state
   - `utils/`: Utility functions
+    - `index`: General utility functions
+    - `storage`: Storage utility functions
+    - `supabase`: Supabase client functions
 
 ### Key Features
 
