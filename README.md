@@ -9,7 +9,7 @@ A React Native mobile application built with Expo Router and Bun package manager
 - [Bun package manager](https://bun.sh/) - Faster Alternative to Node.js with TypeScript support out of the box
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
 - [A Supabase Account](https://supabase.com/)
-- iOS Simulator or Android Emulator (optional for mobile development)
+- iOS Simulator or Android Emulator
 
 ## Getting Started
 
